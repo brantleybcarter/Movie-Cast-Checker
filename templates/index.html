@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Cast Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; }
+        img { max-width: 150px; margin: 5px; }
+        .movie, .actor { display: inline-block; vertical-align: top; text-align: center; margin: 10px; }
+        .poster { width: 150px; height: auto; }
+        .actor-headshot { width: 100px; height: auto; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <h1>Movie Cast Checker</h1>
+    <form method="POST">
+        <label>Movie A: <input type="text" name="movie_a" required></label><br><br>
+        <label>Movie List (comma separated): <input type="text" name="movie_list" required></label><br><br>
+        <button type="submit">Check</button>
+    </form>
+    <hr>
+    {% if results %}
+        <h2>Shared Cast Results:</h2>
+        {% for item in results %}
+            <div class="movie">
+                <img class="poster" src="{{ item['movie_b_poster'] }}" alt="{{ item['movie_b_title'] }}">
+                <p>{{ item['movie_b_title'] }}</p>
+                <p>Shared Actor: {{ item['actor_name'] }}</p>
+                <img class="actor-headshot" src="{{ item['actor_headshot'] }}" alt="{{ item['actor_name'] }}">
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
